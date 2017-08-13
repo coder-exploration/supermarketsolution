@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+
+<title>eCommerce Quick view Popup &amp; Product row - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<style type="text/css">
+    body {
+        font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #292b2c;
+        background-color: #fff;
+        min-width: 320px;
+    }
+
+    .thumbnail {
+        width: 250px;
+    }
+    .product_view .modal-dialog {
+        max-width: 800px;
+        width: 95%;
+    }
+
+    .pre-cost {
+        text-decoration: line-through;
+        color: #a5a5a5;
+    }
+
+    .space-ten {
+        padding: 10px 0;
+    }
+
+    .edit-mode {
+        display:none;
+    }
+
+    span.image-edit-icon 
+    {
+        background:center center no-repeat #fff;
+        height: 100%;
+        position: absolute;
+        width: 65%;
+        z-index: 10;
+        max-width: 300px;
+    }
+ 
+    .image-edit-icon:before 
+    {
+        content: "\f044"; 
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: inherit;
+        color: gray;
+        font-size: 35px;
+        position: absolute;
+        left:50%;
+        bottom: 30%;
+    }
+
+    #product-image-edit
+    {
+        position: absolute;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+        height: 100%;
+        z-index:100;
+    }
+
+</style>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Super Market Solution</h1>
+        <p class="lead text-muted">An ASP.NET MVC Application with WebAPI and Entity Framework.</p>
+        <p>
+            <a href="@Url.Action("Create", "ProductCategories")" class="btn btn-primary">Add Category</a>
+            <a href="@Url.Action("Create", "Products")" class="btn btn-primary">Add Product</a>
+        </p>
+    </div>
+</section>
+<div class="container">
+    @RenderBody()
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model SuperMarket.MVC.Models.ProductCategory
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <h4>Add new category</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <!-- Category field !-->
+            <div class="control-label">@Html.LabelFor(model => model.Category)</div>
+            <div>
+                @Html.TextBoxFor(model => model.Category, new { @class = "form-control", placeholder = "Please enter category name" })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- Description field !-->
+            <div class="control-label">@Html.LabelFor(model => model.Description)</div>
+            <div>
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Please enter category description" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div align="center">
+                <!--Back To Home-->
+                <a href="@Url.Action("Index", "Home")" class="btn  btn-primary">Cancel</a>
+                <!-- Submit button !-->
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+}

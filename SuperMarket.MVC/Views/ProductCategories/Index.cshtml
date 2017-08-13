@@ -1,0 +1,11 @@
+﻿<nav class="col-sm-3 col-md-2 hidden-xs-down sidebar">
+    <ul class="nav nav-pills flex-column">
+        @foreach (var productcategory in ViewBag.listProductCategories)
+        {
+            <li class="nav-item">
+                <a href="#">@productcategory.Category</a>
+            </li>
+        }
+
+    </ul>
+</nav>

@@ -1,0 +1,134 @@
+﻿@model SuperMarket.MVC.Models.Product
+
+<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+    <div class="container">
+        <div class="row">
+            @foreach (var product in ViewBag.listProducts)
+            {
+                var base64 = Convert.ToBase64String(product.Photo);
+                var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+                var productUri = String.Format("../Products/Details/{0}", product.Id);
+
+                <div class="col-md-4" data-toggle="modal" data-target="#product_view" style="cursor:pointer">
+                    <div class="thumbnail" product-id="@product.Id" product-categoryid="@product.CategoryId" product-name="@product.Name" product-description ="@product.Description" product-measurement="@product.Measurement" product-price="@product.Price" product-quantity="@product.QuantityAvailable" product-photo="@base64">
+                        <img src="@imgSrc" alt="" class="img-responsive" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script>
+        $(".row .thumbnail").click(function () {
+            $("#Id").val($(this).attr("product-id"));
+
+            $("#product-name").text($(this).attr("product-name"));
+            $("#Name").val($(this).attr("product-name"));
+
+            $("#CategoryId").val($(this).attr("product-categoryid"));
+
+            $("#product-description").text($(this).attr("product-description"));
+            $("#Description").val($(this).attr("product-description"));
+
+            $("#product-measurement").text($(this).attr("product-measurement"));
+            $("#Measurement").val($(this).attr("product-measurement"));
+
+            $("#product-price").text(parseFloat($(this).attr("product-price")).toFixed(2));
+            $("#Price").val(parseFloat($(this).attr("product-price")).toFixed(2));
+
+            $("#product-quantity").text($(this).attr("product-quantity"));
+            $("#QuantityAvailable").val($(this).attr("product-quantity"));
+
+
+            $("#ProductPhoto").val($(this).attr("product-photo"));
+            $("#product-image").attr("src", $(this).find('img').attr("src"));
+
+        });
+
+        function showEditMode () {
+            $('.read-mode').hide();
+            $('.edit-mode').show();
+            $("#product-image").stop().animate({ "opacity": "0.5" });
+            $("#product-image-edit").show();
+            $(".image-edit-icon").stop().animate({ "opacity": "0.7" }, "fast");
+        };
+
+        function updateImageOnChange(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#product-image')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(300);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function cancelEdit () {
+            $('.read-mode').show();
+            $('.edit-mode').hide();
+            $("#product-image").stop().animate({ "opacity": "1" });
+            $("#product-image-edit").hide();
+            $(".image-edit-icon").css("opacity", "0");
+        };
+    </script>
+
+@using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal fade product_view" id="product_view">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" data-dismiss="modal" class="class pull-right" onclick="cancelEdit();"><span class="glyphicon glyphicon-remove"></span></a>
+                    <input class="form-control" style="display:none;" id="Id" name="Id" type="text" value="">
+                    <h3 class="modal-title read-mode" id="product-name">Product Name</h3>
+                    <input class="form-control edit-mode" style="width: 90%" id="Name" name="Name" type="text" value="">
+                    <input class="form-control" style="display:none;" id="CategoryId" name="CategoryId" type="text" value="">
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 product_img">
+                            <div class="img-container" style="display: block; max-width:300px; height: auto;">
+                                <span class="image-edit-icon" style="opacity: 0"></span>
+                                <img id="product-image" src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="img-responsive">
+                                <input type="file" id="product-image-edit" name="ProductPhoto" onchange="updateImageOnChange(this);" style="display:none;" class="file-loading form-control input-files" accept=".jpg">
+                                <input type="text" id="ProductPhoto" name="PhotoBase64" style="display:none;" value="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 product_content" style="height: 300px;">
+                            <p id="product-description" class="read-mode">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <textarea class="form-control edit-mode" id="Description" name="Description"></textarea>
+                            <div>
+                                Measurement
+                                <span id="product-measurement" class="read-mode"></span>
+                                <input class="form-control edit-mode" id="Measurement" name="Measurement" type="text" value="">
+                            </div>
+                            <div>
+                                Price - $
+                                <span id="product-price" class="read-mode">0.00</span>
+                                <input class="form-control edit-mode" data-val="true" data-val-number="The field Price must be a number." data-val-required="The Price field is required." id="Price" name="Price" type="text" value="">
+                            </div>
+                            <div>
+                                Quantity Available -
+                                <span id="product-quantity" class="read-mode">0</span>
+                                <input class="form-control edit-mode" data-val="true" data-val-number="The field QuantityAvailable must be a number." data-val-required="The QuantityAvailable field is required." id="QuantityAvailable" name="QuantityAvailable" type="text" value="">
+                            </div>
+                            <div class="space-ten"></div>
+                            <div class="btn-ground" style="position: absolute; bottom: 2px; right: 20px;">
+                                <button type="button" class="btn btn-primary read-mode" id="edit-product" onclick="showEditMode();">Edit</button>
+                                <a id="delete-product" href="@Url.Action("Delete", "Products")" class="btn btn-primary read-mode">Delete</a>
+                                <button type="submit" class="btn btn-primary edit-mode">Save</button>
+                                <a href="#" data-dismiss="modal" class="btn btn-primary edit-mode" onclick="cancelEdit();">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</main>
