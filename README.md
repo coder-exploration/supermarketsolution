@@ -10,5 +10,5 @@
   * Razor Views
   * Bootstrap
   * WebAPI Service Integration
-  
-![Alt text](https://github.com/coder-exploration/supermarketsolution/tree/master/screenshots/homepage.jpg?raw=true "Home Page Screenshot")
+
+![Home Page](https://github.com/coder-exploration/supermarketsolution/blob/master/screenshots/homepage.JPG "Home Page")
