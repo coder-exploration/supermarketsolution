@@ -1,23 +1,52 @@
-﻿@model SuperMarket.MVC.Models.Product
+﻿@model PagedList.IPagedList<SuperMarket.MVC.Models.Product>
+@using PagedList.Mvc;
 
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="container">
+        <div class="row" style="margin-right: 10px; padding:4px;">
+            <div class="dropdown pull-right">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Sort By 
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="sortProducts('@ViewBag.SelectedCategoryId', 'Name');">Name</a></li>
+                    <li><a href="#" onclick="sortProducts('@ViewBag.SelectedCategoryId', 'Quantity');">Quantity Available</a></li>
+                    <li><a href="#" onclick="sortProducts('@ViewBag.SelectedCategoryId', 'Price');">Price</a></li>
+                </ul>
+            </div>
+        </div>
         <div class="row">
-            @foreach (var product in ViewBag.listProducts)
+            @foreach (var product in Model)
             {
                 var base64 = Convert.ToBase64String(product.Photo);
                 var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                 var productUri = String.Format("../Products/Details/{0}", product.Id);
 
-                <div class="col-md-4" data-toggle="modal" data-target="#product_view" style="cursor:pointer">
+                <div class="col-xs-6 col-sm-4 col-md-3" data-toggle="modal" data-target="#product_view" style="cursor:pointer">
                     <div class="thumbnail" product-id="@product.Id" product-categoryid="@product.CategoryId" product-name="@product.Name" product-description ="@product.Description" product-measurement="@product.Measurement" product-price="@product.Price" product-quantity="@product.QuantityAvailable" product-photo="@base64">
                         <img src="@imgSrc" alt="" class="img-responsive" />
+                        <div class="text-muted" style="background-color: #eee; padding: 4px;">
+                            <div>
+                                <p style="overflow:hidden; height:20px;">@product.Name</p>
+                                <p style="height:20px;"><span class="pull-left">Price $@product.Price</span><span class="pull-right">Available Quantity @product.QuantityAvailable</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
         </div>
+        <div class="row" style="margin-left: 10px;">
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { categoryId = ViewBag.SelectedCategoryId, sortOrder = ViewBag.CurrentSort, page }))
+        </div>
     </div>
     <script>
+        function sortProducts(categoryId, sortBy) {
+            $('#products-mainsection').load('/Products/Index?categoryId=' + categoryId + '&sortOrder=' + sortBy);
+        };
+
         $(".row .thumbnail").click(function () {
             $("#Id").val($(this).attr("product-id"));
 
@@ -41,6 +70,8 @@
 
             $("#ProductPhoto").val($(this).attr("product-photo"));
             $("#product-image").attr("src", $(this).find('img').attr("src"));
+
+            $("#delete-product").attr("href", "/Products/Delete/" + $(this).attr("product-id"));
 
         });
 

@@ -15,4 +15,3 @@ C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.WebAPI\bin\System.W
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.WebAPI\bin\System.Web.Http.WebHost.xml
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.WebAPI\obj\Debug\SuperMarket.WebAPI.dll
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.WebAPI\obj\Debug\SuperMarket.WebAPI.pdb
-C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.WebAPI\obj\Debug\SuperMarket.WebAPI.csprojResolveAssemblyReference.cache

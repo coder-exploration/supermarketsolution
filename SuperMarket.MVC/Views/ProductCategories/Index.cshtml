@@ -1,11 +1,19 @@
 ﻿<nav class="col-sm-3 col-md-2 hidden-xs-down sidebar">
     <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a href="#" onclick="getProductsByCategory(-1)">All Categories</a>
+        </li>
         @foreach (var productcategory in ViewBag.listProductCategories)
         {
             <li class="nav-item">
-                <a href="#">@productcategory.Category</a>
+                <a href="#" onclick="getProductsByCategory(@productcategory.Id)">@productcategory.Category</a>
             </li>
         }
 
     </ul>
 </nav>
+<script>
+    function getProductsByCategory(categoryId) {
+        $('#products-mainsection').load('/Products/Index?categoryId=' + categoryId);
+    };
+</script>

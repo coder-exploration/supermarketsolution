@@ -15,3 +15,6 @@ C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\bin\Debug
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\obj\Debug\SuperMarket.MVC.Tests.csprojResolveAssemblyReference.cache
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\obj\Debug\SuperMarket.MVC.Tests.dll
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\obj\Debug\SuperMarket.MVC.Tests.pdb
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\bin\Debug\SuperMarket.MVC.Tests.dll.config
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\bin\Debug\PagedList.dll
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC.Tests\bin\Debug\PagedList.xml

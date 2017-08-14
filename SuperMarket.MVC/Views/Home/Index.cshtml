@@ -7,8 +7,12 @@
 
 <div class="container-fluid">
     <div class="row">
-        @Html.Action("Index", "ProductCategories")
-        @Html.Action("Index", "Products")
+        <div id="categories-sidebar">
+            @Html.Action("Index", "ProductCategories")
+        </div>
+        <div id="products-mainsection">
+            @Html.Action("Index", "Products")
+        </div>
     </div>
 </div>
 

@@ -17,11 +17,12 @@ namespace SuperMarket.WebAPI.Controllers
         private SuperMarketEntities db = new SuperMarketEntities();
 
         // GET: api/Products
-        public IQueryable<ProductModel> GetProducts()
+        public IQueryable<ProductModel> GetProducts(int categoryId = -1)
         {
             var ProductList = new List<ProductModel>();
-            
-            foreach(Product obj in db.Products)
+            var dbProducts = (categoryId == -1 ? db.Products : db.Products.Where(x => x.CategoryId == categoryId));
+
+            foreach (Product obj in dbProducts)
             {
                 ProductModel p = new ProductModel();
                 p.Id = obj.Id;

@@ -22,13 +22,14 @@ namespace SuperMarket.MVC.Services
             HttpResponseMessage response = client.PostAsJsonAsync("products", p).Result;
             return response.IsSuccessStatusCode;
         }
-        public IEnumerable<Product> Retrieve()
+        public IEnumerable<Product> Retrieve(int categoryId = -1)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(API_URL);
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("products").Result;
+            HttpResponseMessage response = (categoryId == -1 ? client.GetAsync("products").Result : client.GetAsync("products?categoryId=" + categoryId.ToString()).Result); 
+            
             if (response.IsSuccessStatusCode)
                 return response.Content.ReadAsAsync<IEnumerable<Product>>().Result;
             return null;
@@ -53,9 +54,14 @@ namespace SuperMarket.MVC.Services
             HttpResponseMessage response = client.PutAsJsonAsync("products/" + id.ToString(), p).Result;
             return response.IsSuccessStatusCode;
         }
-        public bool Delete(Product p)
+        public bool Delete(int id)
         {
-            return true;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(API_URL);
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.DeleteAsync("products/" + id.ToString()).Result;
+            return response.IsSuccessStatusCode;
         }
     }
 }

@@ -15,6 +15,9 @@ C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\System.Web.
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\System.Web.Webpages.Razor.xml
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\System.Web.Helpers.xml
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\System.Web.Mvc.xml
-C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\obj\Debug\SuperMarket.MVC.csprojResolveAssemblyReference.cache
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\obj\Debug\SuperMarket.MVC.dll
 C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\obj\Debug\SuperMarket.MVC.pdb
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\PagedList.dll
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\PagedList.Mvc.dll
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\PagedList.xml
+C:\Projects\GitHubRepository\SuperMarketSolution\SuperMarket.MVC\bin\PagedList.Mvc.xml
