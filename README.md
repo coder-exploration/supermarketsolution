@@ -11,3 +11,4 @@
   * Bootstrap
   * WebAPI Service Integration
   
+![Alt text](https://github.com/coder-exploration/supermarketsolution/tree/master/screenshots/homepage.jpg?raw=true "Home Page Screenshot")
